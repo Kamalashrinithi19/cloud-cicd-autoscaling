@@ -1,0 +1,21 @@
+
+version: 0.2
+
+phases:
+  build:
+    commands:
+      - echo "Starting CI validation"
+      - test -f index.html
+      - test -f health
+      - test -f appspec.yml
+      - test -f scripts/restart_nginx.sh
+      - grep -q "Cloud Infrastructure with CI/CD" index.html
+      - grep -q "Application version: v1" index.html
+      - echo "All CI checks passed"
+
+artifacts:
+  files:
+    - index.html
+    - health
+    - appspec.yml
+    - scripts/restart_nginx.sh
